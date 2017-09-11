@@ -1,0 +1,19 @@
+<!-- vim: set ft=markdown:-->
+This is pretty much a port from my [ruby implementation](https://github.com/mlovic/code_exercise_3), so most of what I write there about the design applies here too. 
+
+<!--A couple of differences I can comment on:-->
+
+<!--I like this solution because it shows a common argument for OO, implemented just as elegantly (if not more) in a functional language.-->
+
+No interface was specified in the instructions for Elixir, so I made it similar to the one in Ruby:
+
+    cart = %{}
+
+    with {:ok, cart} <- Checkout.scan(cart, pricing_rules, "VOUCHER"),
+         {:ok, cart} <- Checkout.scan(cart, pricing_rules, "VOUCHER"),
+         {:ok, cart} <- Checkout.scan(cart, pricing_rules, "TSHIRT")
+    do
+      Checkout.total(cart, pricing_rules)
+    end
+
+There are also tests.
